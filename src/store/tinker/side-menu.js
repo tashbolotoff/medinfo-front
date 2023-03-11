@@ -20,6 +20,11 @@ const state = () => {
       },
       {
         icon: 'SettingsIcon',
+        pageName: 'MessageForPatients',
+        title: 'Уведомлении для пациентов'
+      },
+      {
+        icon: 'SettingsIcon',
         pageName: 'side-menu-dashboard',
         title: 'Администрирование',
         subMenu: [

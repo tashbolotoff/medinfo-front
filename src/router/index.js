@@ -41,6 +41,12 @@ const routes = [
         name: 'Users',
         permission: ['SUPER_ADMIN'],
         component: () => import('@/views/Users/users/Main.vue')
+      },
+      {
+        path: 'messageForPatients',
+        name: 'MessageForPatients',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/MessageForPatients/Main.vue')
       }
     ]
   },

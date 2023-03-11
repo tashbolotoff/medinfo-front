@@ -7,6 +7,14 @@ async function getMessagesByPage(page, size) {
     }
   })
 }
+async function getMessagesForPatientByPage(page, size) {
+  return await $api.get('/MessageForPatients', {
+    params: {
+      page: page,
+      size: size
+    }
+  })
+}
 async function getMessages() {
   return await $api.get('/Messages')
 }
@@ -33,5 +41,6 @@ export default {
   createMessage,
   updateMessage,
   getCategories,
-  getMessagesByPage
+  getMessagesByPage,
+  getMessagesForPatientByPage
 }
