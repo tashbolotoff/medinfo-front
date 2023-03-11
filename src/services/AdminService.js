@@ -28,7 +28,7 @@ function createRole({name, nameRu}){
   })
 }
 function hasAccess(permissions) {
-  const userPermissions = store.state.auth.user != null ? store.state.auth.user.privilege : null
+  const userPermissions = store.state.auth.user != null ? store.state.auth.user.privileges : null
   let isAccess = false
   userPermissions.forEach(item => {
     permissions.forEach(item2 => {

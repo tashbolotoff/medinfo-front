@@ -242,7 +242,7 @@ export default defineComponent({
     checkAccess(permission) {
       const allowedRoutes = []
       const userPermissions = JSON.parse(
-        JSON.stringify(store.state.auth.user.privilege)
+        JSON.stringify(store.state.auth.user.privileges)
       )
       return this.checkArray(userPermissions, permission)
     },

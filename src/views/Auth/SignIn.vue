@@ -9,8 +9,9 @@
             <div
               class="-intro-x text-white font-medium text-2xl leading-tight mt-10"
             >
-              <img src="@/assets/icons/login-icon.svg" height="30" alt="Sanarip clinic"/> <br/>
-              Информационная система “Амбулаторная карта” <br/>
+<!--              <img src="@/assets/icons/login-icon.svg" height="30" alt="Sanarip clinic"/> -->
+              <br/>
+              ERP SYSTEM <br/>
             </div>
           </div>
         </div>

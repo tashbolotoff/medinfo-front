@@ -139,12 +139,12 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    if (loggedIn && store.state.auth.user.privilege != null) {
+    if (loggedIn && store.state.auth.user.privileges != null) {
       if (path === '/') {
         next('/workspace')
       }
       const userPermissions = JSON.parse(
-        JSON.stringify(store.state.auth.user.privilege)
+        JSON.stringify(store.state.auth.user.privileges)
       )
       if (checkArray(userPermissions, perm)) {
         next()
