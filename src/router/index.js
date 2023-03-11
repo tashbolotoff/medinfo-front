@@ -25,95 +25,17 @@ const routes = [
         component: () => import('@/views/Users/userRole/Main')
       },
       {
-        path: 'organisationType',
-        name: 'OrganisationType',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/organisationType/Main')
-      },
-      {
-        path: 'status',
-        name: 'Status',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/status/Main')
-      },
-      {
-        path: 'otrasl',
-        name: 'Otrasl',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/otrasl/Main')
-      },
-      {
-        path: 'orgPravs',
-        name: 'OrgPravs',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/orgPrav/Main')
-      },
-      {
         path: 'formaSobst',
         name: 'FormaSobst',
         permission: ['SUPER_ADMIN'],
         component: () => import('@/views/Dictionaries/formaSobst/Main')
       },
       {
-        path: 'sostoyanies',
-        name: 'Sostoyanies',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/sostoyanies/Main')
-      },
-      {
-        path: 'organisationList',
-        name: 'OrganisationList',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/Organisation/MainList.vue')
-      },
-      {
-        path: 'organisationAdd',
-        name: 'OrganisationAdd',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/Organisation/MainAdd.vue')
-      },
-      {
-        path: 'organisationEdit',
-        name: 'OrganisationEdit',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/Organisation/MainEdit.vue')
-      },
-      {
-        path: 'imushestvaAdd',
-        name: 'ImushestvaAdd',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/Imushestva/MainAdd.vue')
-      },
-      {
-        path: 'imushestvaEdit',
-        name: 'ImushestvaEdit',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/Imushestva/MainEdit.vue')
-      },
-      {
-        path: 'zemlyaAdd',
-        name: 'ZemlyaAdd',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/Zemlya/MainAdd.vue')
-      },
-      {
-        path: 'zemlyaEdit',
-        name: 'ZemlyaEdit',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/Zemlya/MainEdit.vue')
-      },
-      {
         path: 'users',
         name: 'Users',
         permission: ['SUPER_ADMIN'],
         component: () => import('@/views/Users/users/Main.vue')
-      },
-      {
-        path: 'mapOrganisations',
-        name: 'MapOrganisations',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Module1_Imushestvo/MapOrganisation/Main.vue')
-      },
+      }
     ]
   },
 

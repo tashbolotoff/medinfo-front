@@ -5,7 +5,7 @@
       <!-- BEGIN: Side Menu -->
       <nav class="side-nav">
         <a href="" class="intro-x flex items-center pl-5 pt-4 mt-3">
-          <h1 class="text-white">ERP System</h1>
+          <h1 class="text-white">MedInfo System</h1>
 <!--          <img-->
 <!--            alt="Tinker Tailwind HTML Admin Template"-->
 <!--            class="w-10"-->

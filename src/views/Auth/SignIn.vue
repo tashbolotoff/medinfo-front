@@ -11,7 +11,7 @@
             >
 <!--              <img src="@/assets/icons/login-icon.svg" height="30" alt="Sanarip clinic"/> -->
               <br/>
-              ERP SYSTEM <br/>
+              MedInfo System <br/>
             </div>
           </div>
         </div>

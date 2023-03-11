@@ -7292,6 +7292,11 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
+vue-yandex-maps@^0.11.13:
+  version "0.11.13"
+  resolved "https://registry.yarnpkg.com/vue-yandex-maps/-/vue-yandex-maps-0.11.13.tgz#09a8a21de86d135e25430e545ac36e91675242ec"
+  integrity sha512-MyIBkKU2rX1vcypy6VEckdhL0NFVlRGTFmYItsqzcb0a43yhHbnAshcLI3FDRbByMsOp6kWFAuDMBJffg6W7jw==
+
 vue3-easy-data-table@^1.5.24:
   version "1.5.27"
   resolved "https://registry.yarnpkg.com/vue3-easy-data-table/-/vue3-easy-data-table-1.5.27.tgz#e0dc59935a257e988465b566740dd3a1d903cfeb"
