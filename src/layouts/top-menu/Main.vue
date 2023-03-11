@@ -8,7 +8,7 @@
       <div class="h-full flex items-center">
         <!-- BEGIN: Logo -->
         <a href="" class="-intro-x hidden md:flex">
-          <h1 class="text-white">ERP System</h1>
+          <h1 class="text-white">MedInfo System</h1>
           <!--          <img-->
           <!--            class="h-8"-->
           <!--            src="@/assets/icons/sanarip_clinic_white.svg"-->
