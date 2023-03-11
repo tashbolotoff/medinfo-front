@@ -10,6 +10,31 @@ const state = () => {
             pageName: 'OrganisationType',
             title: 'Типы организаций',
             permission: ['OBLAST_READ'],
+          },
+          {
+            pageName: 'Status',
+            title: 'Статусы',
+            permission: ['OBLAST_READ'],
+          },
+          {
+            pageName: 'Otrasl',
+            title: 'Отрасли',
+            permission: ['OBLAST_READ'],
+          },
+          {
+            pageName: 'OrgPravs',
+            title: 'Организационно правовые формы',
+            permission: ['OBLAST_READ'],
+          },
+          {
+            pageName: 'FormaSobst',
+            title: 'Формы собственности',
+            permission: ['OBLAST_READ'],
+          },
+          {
+            pageName: 'Sostoyanies',
+            title: 'Состояния',
+            permission: ['OBLAST_READ'],
           }
         ]
       },

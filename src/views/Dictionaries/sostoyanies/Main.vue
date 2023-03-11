@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-12 gap-4 mt-5">
     <div class="col-span-full">
-      <h1 class="text-xl font-bold">Справочник "Типы организаций"</h1>
+      <h1 class="text-xl font-bold">Справочник "Состояния"</h1>
     </div>
     <!--table-->
     <div class="col-span-12 border rounded-xl p-3 bg-theme-4 shadow">
@@ -237,7 +237,7 @@ onMounted(async () => {
 async function getByPagination(page) {
   try {
     await (async () => {
-      DictionariesService.getOrganisationTypesWithPagination({page: page, size: 10}).then(response => {
+      DictionariesService.getSostoyaniesWithPagination({page: page, size: 10}).then(response => {
         genResult.result = response.data.result
         genResult.currentPage = response.data.currentPage
         genResult.pageSize = response.data.pageSize
@@ -270,7 +270,7 @@ function showModalDelete(item) {
 }
 
 function confirmDelete() {
-  DictionariesService.deleteOrganisationType({id: objectForDelete.value.id}).then(response => {
+  DictionariesService.deleteSostoyanies({id: objectForDelete.value.id}).then(response => {
     createToast({
       title: 'Запись успешно удалена!'
     }, {
@@ -292,7 +292,7 @@ function confirmDelete() {
 
 function edit() {
   loading.value = true
-  DictionariesService.editOrganisationType(modalParams.datas).then(response => {
+  DictionariesService.editSostoyanies(modalParams.datas).then(response => {
     loading.value = false
     createToast({
       title: 'Запись успешно изменена!'
@@ -317,7 +317,7 @@ function edit() {
 
 function create() {
   loading.value = true
-  DictionariesService.createOrganisationType(modalParams.datas).then(response => {
+  DictionariesService.createSostoyanies(modalParams.datas).then(response => {
     loading.value = false
     createToast({
       title: 'Запись успешно сохранена!'

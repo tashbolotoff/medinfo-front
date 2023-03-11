@@ -31,6 +31,36 @@ const routes = [
         component: () => import('@/views/Dictionaries/organisationType/Main')
       },
       {
+        path: 'status',
+        name: 'Status',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dictionaries/status/Main')
+      },
+      {
+        path: 'otrasl',
+        name: 'Otrasl',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dictionaries/otrasl/Main')
+      },
+      {
+        path: 'orgPravs',
+        name: 'OrgPravs',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dictionaries/orgPrav/Main')
+      },
+      {
+        path: 'formaSobst',
+        name: 'FormaSobst',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dictionaries/formaSobst/Main')
+      },
+      {
+        path: 'sostoyanies',
+        name: 'Sostoyanies',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dictionaries/sostoyanies/Main')
+      },
+      {
         path: 'organisationList',
         name: 'OrganisationList',
         permission: ['SUPER_ADMIN'],
