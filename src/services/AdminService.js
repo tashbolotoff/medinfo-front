@@ -27,6 +27,39 @@ function createRole({name, nameRu}){
     nameRu: nameRu
   })
 }
+
+//USER METHODS
+async function getUsers(page, size) {
+  return await $api.get('/UserControllers', {
+    params: {
+      page: page,
+      size: size
+    }
+  })
+}
+
+function createUser({email, organizationId, password, identityRoleId, fio, phone, pin}){
+  return $api.post('/UserControllers', {
+    email: email,
+    organizationId: organizationId != null ? organizationId : null,
+    password: password,
+    identityRoleId: identityRoleId,
+    fio: fio,
+    phone: phone,
+    pin: pin
+  })
+}
+function editUser({id, email, organizationId, password, identityRoleId, fio, phone, pin}){
+  return $api.put('/UserControllers/' + id, {
+    email: email,
+    organizationId: organizationId != null ? organizationId : null,
+    password: password,
+    identityRoleId: identityRoleId,
+    fio: fio,
+    phone: phone,
+    pin: pin
+  })
+}
 function hasAccess(permissions) {
   const userPermissions = store.state.auth.user != null ? store.state.auth.user.privileges : null
   let isAccess = false
@@ -46,5 +79,8 @@ export default {
   getPermissionsByRoleId,
   editRolePermissions,
   hasAccess,
-  createRole
+  createRole,
+  getUsers,
+  createUser,
+  editUser
 }

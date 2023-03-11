@@ -1,18 +1,18 @@
 const state = () => {
   return {
     menu: [
-      {
-        pageName: 'Home',
-        title: 'Главная',
-      },
-      {
-        pageName: 'EnlistedPopulation',
-        title: 'Онлайн приписка',
-      },
-      {
-        pageName: 'OnlineRecording',
-        title: 'Онлайн запись',
-      }
+      // {
+      //   pageName: 'Home',
+      //   title: 'Главная',
+      // },
+      // {
+      //   pageName: 'EnlistedPopulation',
+      //   title: 'Онлайн приписка',
+      // },
+      // {
+      //   pageName: 'OnlineRecording',
+      //   title: 'Онлайн запись',
+      // }
     ]
   }
 }
