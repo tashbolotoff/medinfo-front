@@ -19,6 +19,11 @@ const state = () => {
         ]
       },
       {
+        icon: 'LayersIcon',
+        pageName: 'Categories',
+        title: 'Категории',
+      },
+      {
         icon: 'SettingsIcon',
         pageName: 'MessageForPatients',
         title: 'Уведомлении для пациентов'

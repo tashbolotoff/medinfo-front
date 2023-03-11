@@ -37,6 +37,12 @@ const routes = [
         component: () => import('@/views/Dictionaries/message/Main')
       },
       {
+        path: 'categories',
+        name: 'Categories',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Categories/Main')
+      },
+      {
         path: 'users',
         name: 'Users',
         permission: ['SUPER_ADMIN'],
