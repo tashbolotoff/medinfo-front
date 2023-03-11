@@ -15,7 +15,9 @@
           <thead>
           <tr class="bg-gray-200 text-gray-700">
             <th>Название</th>
-            <th class="text-center whitespace-nowrap">Действия</th>
+            <th>Сайт</th>
+            <th>URL</th>
+            <th class="text-center">Действия</th>
           </tr>
           </thead>
           <tbody>
@@ -25,7 +27,13 @@
             class="hover:bg-gray-200"
           >
             <td class="border-b dark:border-dark-5">
-              {{ item.name }}
+              {{ item.name != null ? item.name : '(отсутствует)' }}
+            </td>
+            <td class="border-b dark:border-dark-5">
+              {{ item.site != null ? item.site : '(отсутствует)' }}
+            </td>
+            <td class="border-b dark:border-dark-5">
+              {{ item.url != null ? item.url : '(отсутствует)' }}
             </td>
             <td class="table-report__action border-b dark:border-dark-5">
               <div class="flex justify-center items-center">
@@ -134,7 +142,39 @@
                 class="form-control"
               />
             </div>
-            <!-- Код-->
+            <!-- Site-->
+            <div class="col-span-12">
+              <label class="form-label">Введите сайт <span style="color: red">*</span></label>
+              <input
+                v-model="modalParams.datas.site"
+                required
+                type="text"
+                placeholder="Введите сайт"
+                class="form-control"
+              />
+            </div>
+            <!-- URL-->
+            <div class="col-span-12">
+              <label class="form-label">Введите URL <span style="color: red">*</span></label>
+              <input
+                v-model="modalParams.datas.url"
+                required
+                type="text"
+                placeholder="Введите URL"
+                class="form-control"
+              />
+            </div>
+            <!-- Secret-->
+            <div class="col-span-12">
+              <label class="form-label">Введите Secret <span style="color: red">*</span></label>
+              <input
+                v-model="modalParams.datas.secret"
+                required
+                type="text"
+                placeholder="Введите Secret"
+                class="form-control"
+              />
+            </div>
           </div>
           <!-- END: Modal Body -->
           <!-- BEGIN: Modal Footer -->
@@ -197,10 +237,8 @@
 </template>
 
 <script setup>
-import Select2 from "vue3-select2-component";
 import {onMounted, reactive, ref} from "vue";
 import {createToast} from "mosha-vue-toastify";
-import {select2Settings} from "@/helpers/select2Settings";
 import {DictionariesService} from "@/services";
 
 const loading = ref(false)
@@ -213,16 +251,15 @@ const genResult = reactive({
   pagenumbersStart: null,
   pagenumbersEnd: null
 })
-// const dictionaries = reactive({
-//   contraceptionType: [],
-//   dictMiType: []
-// })
 const modalParams = reactive({
   show: false,
   isEditModal: false,
   datas: {
     id: null,
     name: null,
+    site: null,
+    url: null,
+    secret: null
   }
 })
 const objectForDelete = ref({
@@ -231,13 +268,12 @@ const objectForDelete = ref({
 
 onMounted(async () => {
   await getByPagination(1)
-  //getDictionaries()
 })
 
 async function getByPagination(page) {
   try {
     await (async () => {
-      DictionariesService.getFormaSobstsWithPagination({page: page, size: 10}).then(response => {
+      DictionariesService.getSystemasWithPagination({page: page, size: 10}).then(response => {
         genResult.result = response.data.result
         genResult.currentPage = response.data.currentPage
         genResult.pageSize = response.data.pageSize
@@ -262,7 +298,10 @@ function showEditModal(item) {
   modalParams.show = true
   modalParams.isEditModal = true
   modalParams.datas.id = item.id
+  modalParams.datas.site = item.site
   modalParams.datas.name = item.name
+  modalParams.datas.url = item.url
+  modalParams.datas.secret = item.secret
 }
 
 function showModalDelete(item) {
@@ -270,7 +309,7 @@ function showModalDelete(item) {
 }
 
 function confirmDelete() {
-  DictionariesService.deleteFormaSobsts({id: objectForDelete.value.id}).then(response => {
+  DictionariesService.deleteSystema({id: objectForDelete.value.id}).then(response => {
     createToast({
       title: 'Запись успешно удалена!'
     }, {
@@ -292,7 +331,7 @@ function confirmDelete() {
 
 function edit() {
   loading.value = true
-  DictionariesService.editFormaSobsts(modalParams.datas).then(response => {
+  DictionariesService.editSystema(modalParams.datas).then(response => {
     loading.value = false
     createToast({
       title: 'Запись успешно изменена!'
@@ -317,7 +356,7 @@ function edit() {
 
 function create() {
   loading.value = true
-  DictionariesService.createFormaSobsts(modalParams.datas).then(response => {
+  DictionariesService.createSystema(modalParams.datas).then(response => {
     loading.value = false
     createToast({
       title: 'Запись успешно сохранена!'
@@ -343,17 +382,9 @@ function create() {
 function resetData() {
   modalParams.show = false
   modalParams.datas.id = null
+  modalParams.datas.site = null
   modalParams.datas.name = null
+  modalParams.datas.url = null
+  modalParams.datas.secret = null
 }
-
-// function getDictionaries() {
-//   DictionariesService.getDictionaryByTypeWithoutPage('DictMiTypes').then(response => {
-//     dictionaries.dictMiType.splice(0, dictionaries.dictMiType.length)
-//     dictionaries.dictMiType.push(...response)
-//   })
-//   DictionariesService.getDictionaryByTypeWithoutPage('DictContraceptionType').then(response => {
-//     dictionaries.contraceptionType.splice(0, dictionaries.contraceptionType.length)
-//     dictionaries.contraceptionType.push(...response)
-//   })
-// }
 </script>

@@ -19,18 +19,20 @@ async function getSystemaById({id}) {
   return await $api.get('/Systems/' + id)
 }
 
-async function createSystema({name, url, secret}) {
+async function createSystema({name, site, url, secret}) {
   return await $api.post('/Systems', {
     name,
+    site,
     url,
     secret
   })
 }
 
-async function editSystema({id, name, url, secret}) {
+async function editSystema({id, name, site, url, secret}) {
   return await $api.put('/Systems/' + id, {
     id,
     name,
+    site,
     url,
     secret
   })
