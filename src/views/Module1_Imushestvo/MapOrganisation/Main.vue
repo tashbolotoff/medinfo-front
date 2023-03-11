@@ -93,6 +93,12 @@ const datas = reactive({
 })
 
 onMounted(async () => {
+  if (localStorage.getItem('reloaded')) {
+    localStorage.removeItem('reloaded');
+  } else {
+    localStorage.setItem('reloaded', '1');
+    location.reload();
+  }
   refreshData()
 })
 
