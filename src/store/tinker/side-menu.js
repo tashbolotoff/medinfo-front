@@ -7,8 +7,8 @@ const state = () => {
         title: 'Справочники',
         subMenu: [
           {
-            pageName: 'FormaSobst',
-            title: 'Формы собственности',
+            pageName: 'Systema',
+            title: 'Системы',
             permission: ['OBLAST_READ'],
           }
         ]

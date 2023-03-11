@@ -25,10 +25,10 @@ const routes = [
         component: () => import('@/views/Users/userRole/Main')
       },
       {
-        path: 'formaSobst',
-        name: 'FormaSobst',
+        path: 'systema',
+        name: 'Systema',
         permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/formaSobst/Main')
+        component: () => import('@/views/Dictionaries/systema/Main')
       },
       {
         path: 'users',

@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-12 gap-4 mt-5">
     <div class="col-span-full">
-      <h1 class="text-xl font-bold">Справочник "Формы собственности"</h1>
+      <h1 class="text-xl font-bold">Справочник систем</h1>
     </div>
     <!--table-->
     <div class="col-span-12 border rounded-xl p-3 bg-theme-4 shadow">
@@ -357,4 +357,3 @@ function resetData() {
 //   })
 // }
 </script>
-
