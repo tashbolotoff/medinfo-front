@@ -31,6 +31,12 @@ const routes = [
         component: () => import('@/views/Dictionaries/systema/Main')
       },
       {
+        path: 'messages',
+        name: 'Messages',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dictionaries/message/Main')
+      },
+      {
         path: 'users',
         name: 'Users',
         permission: ['SUPER_ADMIN'],

@@ -10,6 +10,11 @@ const state = () => {
             pageName: 'Systema',
             title: 'Системы',
             permission: ['OBLAST_READ'],
+          },
+          {
+            pageName: 'Messages',
+            title: 'Сообщении',
+            permission: ['OBLAST_READ'],
           }
         ]
       },

@@ -5,6 +5,7 @@ import AreaService from '@/services/COATE/AreaService'
 import AdminService from '@/services/AdminService'
 import OrganisationService from '@/services/Module1_ImushestvoServices/OrganisationService'
 import DictionariesService from '@/services/DictionariesService'
+import MessageService from '@/services/MessageService'
 
 export {
   AuthService,
@@ -13,5 +14,6 @@ export {
   AreaService,
   AdminService,
   OrganisationService,
-  DictionariesService
+  DictionariesService,
+  MessageService
 }
