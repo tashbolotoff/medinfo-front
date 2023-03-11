@@ -6,7 +6,7 @@ async function getOrganisationsByPage(page, size) {
       size: size
     }
   })
-}async function getOrganisations(page, size) {
+}async function getOrganisations() {
   return await $api.get('/Organisations')
 }
 
