@@ -3,7 +3,7 @@ import { AuthService } from '@/services'
 // eslint-disable-next-line camelcase
 import Jwt_decode from 'jwt-decode'
 const userFromLS = JSON.parse(localStorage.getItem('user'))
-const decodedJWTExpDate = userFromLS != null ? new Date(Jwt_decode(userFromLS.access_token).exp * 1000) : 0
+const decodedJWTExpDate = userFromLS != null ? new Date(Jwt_decode(userFromLS.jwtToken).exp * 1000) : 0
 const user = decodedJWTExpDate > new Date() ? userFromLS : null
 const initialState = user
   ? { status: { loggedIn: true }, user }

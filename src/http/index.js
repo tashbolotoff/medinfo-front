@@ -9,7 +9,7 @@ api.interceptors.request.use(
   config => {
     const token = getItem('user')
     if (token) {
-      const jwtToken = token ? `Bearer ${token.access_token}` : ''
+      const jwtToken = token ? `Bearer ${token.jwtToken}` : ''
       config.headers.Authorization = jwtToken
     }
     return config

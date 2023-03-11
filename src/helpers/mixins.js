@@ -9,7 +9,7 @@ export default function mixins() {
     const loggedIn = store.state.auth.user
     const decodedJWTExpDate =
       loggedIn != null
-        ? new Date(Jwt_decode(loggedIn.access_token).exp * 1000)
+        ? new Date(Jwt_decode(loggedIn.jwtToken).exp * 1000)
         : 0
     if (decodedJWTExpDate <= new Date()) {
       router.push('/logout')
