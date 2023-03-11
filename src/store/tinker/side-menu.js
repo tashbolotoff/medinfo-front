@@ -30,6 +30,11 @@ const state = () => {
       },
       {
         icon: 'SettingsIcon',
+        pageName: 'Dashboards',
+        title: 'Дашборды'
+      },
+      {
+        icon: 'SettingsIcon',
         pageName: 'side-menu-dashboard',
         title: 'Администрирование',
         subMenu: [

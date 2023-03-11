@@ -53,6 +53,12 @@ const routes = [
         name: 'MessageForPatients',
         permission: ['SUPER_ADMIN'],
         component: () => import('@/views/MessageForPatients/Main.vue')
+      },
+      {
+        path: 'dashboards',
+        name: 'Dashboards',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dashboards/Main.vue')
       }
     ]
   },
