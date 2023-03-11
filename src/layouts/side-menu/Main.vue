@@ -5,17 +5,18 @@
       <!-- BEGIN: Side Menu -->
       <nav class="side-nav">
         <a href="" class="intro-x flex items-center pl-5 pt-4 mt-3">
-          <img
-            alt="Tinker Tailwind HTML Admin Template"
-            class="w-10"
-            src="@/assets/icons/logo_sm.svg"
-          />
-          <img
-            style="margin-left: 20px;"
-            alt="Tinker Tailwind HTML Admin Template"
-            class="h-10"
-            src="@/assets/icons/logo_lg.svg"
-          />
+          <h1 class="text-white">ERP System</h1>
+<!--          <img-->
+<!--            alt="Tinker Tailwind HTML Admin Template"-->
+<!--            class="w-10"-->
+<!--            src="@/assets/icons/logo_sm.svg"-->
+<!--          />-->
+<!--          <img-->
+<!--            style="margin-left: 20px;"-->
+<!--            alt="Tinker Tailwind HTML Admin Template"-->
+<!--            class="h-10"-->
+<!--            src="@/assets/icons/logo_lg.svg"-->
+<!--          />-->
         </a>
         <div class="side-nav__devider my-6"></div>
         <ul>
@@ -211,32 +212,32 @@ export default defineComponent({
   methods:{
     checkMainMenu(menu) {
       const parsedMenu = JSON.parse(JSON.stringify(menu))
-      let flag = false
-      if (!parsedMenu.subMenu){
-        return this.checkAccess(parsedMenu.permission)
-      }else {
-        for(let i = 0; i < parsedMenu.subMenu.length; i++){
-          if(!parsedMenu.subMenu[i].subMenu){
-            if(this.checkAccess(parsedMenu.subMenu[i].permission)){
-              flag = true
-            }
-          }else{
-            for(let x = 0; x < parsedMenu.subMenu[i].subMenu.length; x++){
-              if(!parsedMenu.subMenu[i].subMenu[x].subMenu){
-                if(this.checkAccess(parsedMenu.subMenu[i].subMenu[x].permission)){
-                  flag = true
-                }
-              }else{
-                for(let z = 0; z < parsedMenu.subMenu[i].subMenu[x].subMenu.length; z++){
-                  if(this.checkAccess(parsedMenu.subMenu[i].subMenu[x].subMenu[z].permission)){
-                    flag = true
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      let flag = true
+      // if (!parsedMenu.subMenu){
+      //   return this.checkAccess(parsedMenu.permission)
+      // }else {
+      //   for(let i = 0; i < parsedMenu.subMenu.length; i++){
+      //     if(!parsedMenu.subMenu[i].subMenu){
+      //       if(this.checkAccess(parsedMenu.subMenu[i].permission)){
+      //         flag = true
+      //       }
+      //     }else{
+      //       for(let x = 0; x < parsedMenu.subMenu[i].subMenu.length; x++){
+      //         if(!parsedMenu.subMenu[i].subMenu[x].subMenu){
+      //           if(this.checkAccess(parsedMenu.subMenu[i].subMenu[x].permission)){
+      //             flag = true
+      //           }
+      //         }else{
+      //           for(let z = 0; z < parsedMenu.subMenu[i].subMenu[x].subMenu.length; z++){
+      //             if(this.checkAccess(parsedMenu.subMenu[i].subMenu[x].subMenu[z].permission)){
+      //               flag = true
+      //             }
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
       return flag
     },
     checkAccess(permission) {
@@ -247,16 +248,16 @@ export default defineComponent({
       return this.checkArray(userPermissions, permission)
     },
     checkArray(userPermissions, permission) {
-      let flagShow = false
-      if (permission != null || permission != undefined) {
-        userPermissions.forEach(item => {
-          permission.forEach(item2 => {
-            if (item === item2 || item === 'SUPER_ADMIN') {
-              flagShow = true
-            }
-          })
-        })
-      }
+      let flagShow = true
+      // if (permission != null || permission != undefined) {
+      //   userPermissions.forEach(item => {
+      //     permission.forEach(item2 => {
+      //       if (item === item2 || item === 'SUPER_ADMIN') {
+      //         flagShow = true
+      //       }
+      //     })
+      //   })
+      // }
       return flagShow
     }
   }

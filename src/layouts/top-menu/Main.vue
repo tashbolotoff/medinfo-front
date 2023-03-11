@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MobileMenu :dashboard-layout="dashboardLayout" layout="top-menu" />
+    <MobileMenu :dashboard-layout="dashboardLayout" layout="top-menu"/>
     <!-- BEGIN: Top Bar -->
     <div
       class="top-bar-boxed px-4 md:px-6"
@@ -8,11 +8,12 @@
       <div class="h-full flex items-center">
         <!-- BEGIN: Logo -->
         <a href="" class="-intro-x hidden md:flex">
-          <img
-            class="h-8"
-            src="@/assets/icons/sanarip_clinic_white.svg"
-            alt="Sanarip Clinic"
-          />
+          <h1 class="text-white">ERP System</h1>
+          <!--          <img-->
+          <!--            class="h-8"-->
+          <!--            src="@/assets/icons/sanarip_clinic_white.svg"-->
+          <!--            alt="Sanarip Clinic"-->
+          <!--          />-->
         </a>
         <!-- END: Logo -->
         <!-- BEGIN: Top Menu -->
@@ -34,11 +35,11 @@
                 @click="linkTo(menu, router, $event)"
               >
                 <div class="top-menu__icon">
-                  <component :is="menu.icon" />
+                  <component :is="menu.icon"/>
                 </div>
                 <div class="top-menu__title" style="margin-left: 0 !important; margin-right: 0 !important;">
                   {{ menu.title }}
-                  <ChevronDownIcon v-if="menu.subMenu" class="top-menu__sub-icon" />
+                  <ChevronDownIcon v-if="menu.subMenu" class="top-menu__sub-icon"/>
                 </div>
               </a>
               <!-- BEGIN: Second Child -->
@@ -54,7 +55,7 @@
                     @click="linkTo(subMenu, router, $event)"
                   >
                     <div class="top-menu__icon">
-                      <ActivityIcon />
+                      <ActivityIcon/>
                     </div>
                     <div class="top-menu__title">
                       {{ subMenu.title }}
@@ -82,7 +83,7 @@
                         @click="linkTo(lastSubMenu, router, $event)"
                       >
                         <div class="top-menu__icon">
-                          <component :is="'zap-icon'" />
+                          <component :is="'zap-icon'"/>
                         </div>
                         <div class="top-menu__title">
                           {{ lastSubMenu.title }}
@@ -115,21 +116,21 @@
       :class="{ 'content--dashboard': dashboardLayout }"
       class="content content--top-nav"
     >
-      <router-view />
+      <router-view/>
     </div>
     <!-- END: Content -->
   </div>
 </template>
 
 <script>
-import { defineComponent, computed, provide, onMounted, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useStore } from '@/store'
-import { helper as $h } from '@/utils/helper'
+import {defineComponent, computed, provide, onMounted, ref, watch} from 'vue'
+import {useRoute, useRouter} from 'vue-router'
+import {useStore} from '@/store'
+import {helper as $h} from '@/utils/helper'
 import TopBar from '@/components/top-bar/Main.vue'
 import MobileMenu from '@/components/mobile-menu/MobileMenuForMain.vue'
 import DarkModeSwitcher from '@/components/dark-mode-switcher/Main.vue'
-import { nestedMenu, linkTo } from '@/layouts/side-menu'
+import {nestedMenu, linkTo} from '@/layouts/side-menu'
 
 export default defineComponent({
   components: {

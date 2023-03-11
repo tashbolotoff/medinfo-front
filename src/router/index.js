@@ -13,24 +13,6 @@ const routes = [
     component: () => import('@/layouts/side-menu/Main'),
     children: [
       {
-        path: 'contries',
-        name: 'Country',
-        permission: ['DICT_READ'],
-        component: () => import('@/views/COATE/Country')
-      },
-      {
-        path: 'regions',
-        name: 'Region',
-        permission: ['DICT_READ'],
-        component: () => import('@/views/COATE/Region')
-      },
-      {
-        path: 'areas',
-        name: 'Area',
-        permission: ['DICT_READ'],
-        component: () => import('@/views/COATE/Area')
-      },
-      {
         path: 'accessControl',
         name: 'AccessControl',
         permission: ['SUPER_ADMIN'],
@@ -41,6 +23,66 @@ const routes = [
         name: 'UserRole',
         permission: ['SUPER_ADMIN'],
         component: () => import('@/views/Users/userRole/Main')
+      },
+      {
+        path: 'organisationType',
+        name: 'OrganisationType',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Dictionaries/organisationType/Main')
+      },
+      {
+        path: 'organisationList',
+        name: 'OrganisationList',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/Organisation/MainList.vue')
+      },
+      {
+        path: 'organisationAdd',
+        name: 'OrganisationAdd',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/Organisation/MainAdd.vue')
+      },
+      {
+        path: 'organisationEdit',
+        name: 'OrganisationEdit',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/Organisation/MainEdit.vue')
+      },
+      {
+        path: 'imushestvaAdd',
+        name: 'ImushestvaAdd',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/Imushestva/MainAdd.vue')
+      },
+      {
+        path: 'imushestvaEdit',
+        name: 'ImushestvaEdit',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/Imushestva/MainEdit.vue')
+      },
+      {
+        path: 'zemlyaAdd',
+        name: 'ZemlyaAdd',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/Zemlya/MainAdd.vue')
+      },
+      {
+        path: 'zemlyaEdit',
+        name: 'ZemlyaEdit',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/Zemlya/MainEdit.vue')
+      },
+      {
+        path: 'users',
+        name: 'Users',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Users/users/Main.vue')
+      },
+      {
+        path: 'mapOrganisations',
+        name: 'MapOrganisations',
+        permission: ['SUPER_ADMIN'],
+        component: () => import('@/views/Module1_Imushestvo/MapOrganisation/Main.vue')
       },
     ]
   },
@@ -161,16 +203,16 @@ router.beforeEach((to, from, next) => {
   }
 })
 const checkArray = function (userPermissions, permission) {
-  let isAccess = false
-  if (permission != null || permission != undefined) {
-    userPermissions.forEach(item => {
-      permission.forEach(item2 => {
-        if (item === item2 || item === 'SUPER_ADMIN') {
-          isAccess = true
-        }
-      })
-    })
-  }
+  let isAccess = true
+  // if (permission != null || permission != undefined) {
+  //   userPermissions.forEach(item => {
+  //     permission.forEach(item2 => {
+  //       if (item === item2 || item === 'SUPER_ADMIN') {
+  //         isAccess = true
+  //       }
+  //     })
+  //   })
+  // }
   return isAccess
 }
 

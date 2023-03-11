@@ -2,26 +2,26 @@ const state = () => {
   return {
     menu: [
       {
-        icon: 'GlobeIcon',
+        icon: 'LayersIcon',
         pageName: 'side-menu-dashboard',
-        title: 'COATE',
+        title: 'Справочники',
         subMenu: [
           {
-            pageName: 'Region',
-            title: 'Области',
+            pageName: 'OrganisationType',
+            title: 'Типы организаций',
             permission: ['OBLAST_READ'],
-          },
-          {
-            pageName: 'Area',
-            title: 'Районы',
-            permission: ['RAYON_READ'],
           }
         ]
       },
       {
-        icon: 'DatabaseIcon',
-        pageName: 'side-menu-dashboard',
-        title: 'Справочники',
+        icon: 'HomeIcon',
+        pageName: 'OrganisationList',
+        title: 'Организации'
+      },
+      {
+        icon: 'MapIcon',
+        pageName: 'MapOrganisations',
+        title: 'Карта имуществ'
       },
       {
         icon: 'SettingsIcon',
@@ -36,6 +36,11 @@ const state = () => {
           {
             pageName: 'UserRole',
             title: 'Роли',
+            permission: ['SUPER_ADMIN']
+          },
+          {
+            pageName: 'Users',
+            title: 'Пользователи',
             permission: ['SUPER_ADMIN']
           }
         ]
