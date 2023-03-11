@@ -12,6 +12,28 @@ const state = () => {
             permission: ['OBLAST_READ'],
           }
         ]
+      },
+      {
+        icon: 'SettingsIcon',
+        pageName: 'side-menu-dashboard',
+        title: 'Администрирование',
+        subMenu: [
+          {
+            pageName: 'AccessControl',
+            title: 'Контроль доступов',
+            permission: ['SUPER_ADMIN']
+          },
+          {
+            pageName: 'UserRole',
+            title: 'Роли',
+            permission: ['SUPER_ADMIN']
+          },
+          {
+            pageName: 'Users',
+            title: 'Пользователи',
+            permission: ['SUPER_ADMIN']
+          }
+        ]
       }
     ]
   }

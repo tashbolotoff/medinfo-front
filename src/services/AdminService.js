@@ -38,10 +38,9 @@ async function getUsers(page, size) {
   })
 }
 
-function createUser({email, organizationId, password, identityRoleId, fio, phone, pin}){
+function createUser({email, password, identityRoleId, fio, phone, pin}){
   return $api.post('/UserControllers', {
     email: email,
-    organizationId: organizationId != null ? organizationId : null,
     password: password,
     identityRoleId: identityRoleId,
     fio: fio,
@@ -49,10 +48,9 @@ function createUser({email, organizationId, password, identityRoleId, fio, phone
     pin: pin
   })
 }
-function editUser({id, email, organizationId, password, identityRoleId, fio, phone, pin}){
+function editUser({id, email, password, identityRoleId, fio, phone, pin}){
   return $api.put('/UserControllers/' + id, {
     email: email,
-    organizationId: organizationId != null ? organizationId : null,
     password: password,
     identityRoleId: identityRoleId,
     fio: fio,

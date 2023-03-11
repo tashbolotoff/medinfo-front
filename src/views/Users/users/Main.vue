@@ -18,7 +18,6 @@
             <th>ФИО</th>
             <th>Телефон</th>
             <th>E-Mail</th>
-            <th>Организация</th>
             <th class="text-center whitespace-nowrap">Действия</th>
           </tr>
           </thead>
@@ -39,9 +38,6 @@
             </td>
             <td class="border-b dark:border-dark-5">
               {{ item.email != null ? item.email : '(отсутствует)' }}
-            </td>
-            <td class="border-b dark:border-dark-5">
-              {{ item.organisation != null ? item.organisation.name : '(отсутствует)' }}
             </td>
             <td class="table-report__action border-b dark:border-dark-5">
               <div class="flex justify-center items-center">
@@ -181,12 +177,6 @@
                 class="form-control"
               />
             </div>
-            <!-- Организация-->
-            <div class="col-span-12">
-              <label class="form-label">Организация</label>
-              <Select2 v-model="modalParams.datas.organizationId" :options="dictionaries.organisations"
-                       :settings="select2Settings"/>
-            </div>
             <!-- Роль-->
             <div class="col-span-12">
               <label class="form-label">Роль</label>
@@ -218,39 +208,6 @@
       </div>
     </div>
   </div>
-
-  <!-- BEGIN: Delete Confirmation Modal -->
-  <div
-    id="delete-confirmation-modal"
-    class="modal"
-    tabindex="-1"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body p-0">
-          <div class="p-5 text-center">
-            <XCircleIcon class="w-16 h-16 text-theme-6 mx-auto mt-3"/>
-            <div class="text-3xl mt-5">Вы уверены?</div>
-            <div class="text-gray-600 mt-2">
-              Вы уверены что хотите удалить эту запись? <br/>
-            </div>
-          </div>
-          <div class="px-5 pb-8 text-center">
-            <button
-              type="button"
-              data-dismiss="modal"
-              class="btn btn-outline-secondary w-24 mr-1"
-            >
-              Отмена
-            </button>
-            <button @click="confirmDelete" data-dismiss="modal" type="button" class="btn btn-danger w-24">Удалить
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- END: Modal Content -->
 </template>
 
@@ -260,7 +217,7 @@ import {onMounted, reactive, ref} from "vue";
 import {createToast} from "mosha-vue-toastify";
 import $api from "@/http";
 import {select2Settings} from "@/helpers/select2Settings";
-import {AdminService, OrganisationService} from "@/services";
+import {AdminService} from "@/services";
 
 const loading = ref(false)
 const genResult = reactive({
@@ -273,8 +230,7 @@ const genResult = reactive({
   pagenumbersEnd: null
 })
 const dictionaries = reactive({
-  userRoles: [],
-  organisations: []
+  userRoles: []
 })
 const modalParams = reactive({
   show: false,
@@ -282,7 +238,6 @@ const modalParams = reactive({
   datas: {
     id: null,
     email: null,
-    organizationId: null,
     password: null,
     identityRoleId: null,
     fio: null,
@@ -336,7 +291,6 @@ function showEditModal(item) {
   modalParams.isEditModal = true
   modalParams.datas.id = item.id
   modalParams.datas.email = item.email
-  modalParams.datas.organizationId = item.organisationId
   modalParams.datas.password = item.password
   modalParams.datas.identityRoleId = item.identityRoleId
   modalParams.datas.fio = item.fio
@@ -398,7 +352,6 @@ function resetData() {
   modalParams.show = false
   modalParams.datas.id = null
   modalParams.datas.email = null
-  modalParams.datas.organizationId = null
   modalParams.datas.password = null
   modalParams.datas.identityRoleId = null
   modalParams.datas.fio = null
@@ -411,13 +364,6 @@ function getDictionaries() {
     dictionaries.userRoles = []
     response.data.result.forEach(item => {
       dictionaries.userRoles.push({id: item.id, text: item.name})
-    })
-  })
-  OrganisationService.getOrganisations().then(response => {
-    console.log(response)
-    dictionaries.organisations = []
-    response.data.result.forEach(item => {
-      dictionaries.organisations.push({id: item.id, text: item.name})
     })
   })
 }
