@@ -7,6 +7,8 @@ import OrganisationService from '@/services/Module1_ImushestvoServices/Organisat
 import DictionariesService from '@/services/DictionariesService'
 import MessageService from '@/services/MessageService'
 import CategoriesService from '@/services/CategoriesService'
+import VariantsService from '@/services/VariantsService'
+import QuestionService from '@/services/QuestionService'
 
 export {
   AuthService,
@@ -17,5 +19,7 @@ export {
   OrganisationService,
   DictionariesService,
   MessageService,
-  CategoriesService
+  CategoriesService,
+  VariantsService,
+  QuestionService
 }

@@ -25,40 +25,22 @@ const routes = [
         component: () => import('@/views/Users/userRole/Main')
       },
       {
-        path: 'systema',
-        name: 'Systema',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/systema/Main')
-      },
-      {
-        path: 'messages',
-        name: 'Messages',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dictionaries/message/Main')
-      },
-      {
-        path: 'categories',
-        name: 'Categories',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Categories/Main')
-      },
-      {
         path: 'users',
         name: 'Users',
         permission: ['SUPER_ADMIN'],
         component: () => import('@/views/Users/users/Main.vue')
       },
       {
-        path: 'messageForPatients',
-        name: 'MessageForPatients',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/MessageForPatients/Main.vue')
+        path: 'variants',
+        name: 'Variants',
+        permission: ['ANKETA_READ'],
+        component: () => import('@/views/Variants/MainList.vue')
       },
       {
-        path: 'dashboards',
-        name: 'Dashboards',
-        permission: ['SUPER_ADMIN'],
-        component: () => import('@/views/Dashboards/Main.vue')
+        path: 'variantsEdit',
+        name: 'VariantsEdit',
+        permission: ['ANKETA_EDIT'],
+        component: () => import('@/views/Variants/MainEdit.vue')
       }
     ]
   },

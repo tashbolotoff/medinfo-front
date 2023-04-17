@@ -7,31 +7,11 @@ const state = () => {
         title: 'Справочники',
         subMenu: [
           {
-            pageName: 'Systema',
-            title: 'Системы',
-            permission: ['OBLAST_READ'],
-          },
-          {
-            pageName: 'Messages',
-            title: 'Сообщении',
-            permission: ['OBLAST_READ'],
+            pageName: 'Variants',
+            title: 'Анкеты',
+            permission: ['ANKETA_READ'],
           }
         ]
-      },
-      {
-        icon: 'LayersIcon',
-        pageName: 'Categories',
-        title: 'Категории',
-      },
-      {
-        icon: 'SettingsIcon',
-        pageName: 'MessageForPatients',
-        title: 'Уведомлении для пациентов'
-      },
-      {
-        icon: 'SettingsIcon',
-        pageName: 'Dashboards',
-        title: 'Дашборды'
       },
       {
         icon: 'SettingsIcon',
