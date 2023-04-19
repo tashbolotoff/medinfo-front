@@ -5,7 +5,15 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/layouts/top-menu/Main')
+    component: () => import('@/layouts/top-menu/Main'),
+    children: [
+      {
+        path: '/',
+        name: 'Main',
+        permission: [''],
+        component: () => import('@/views/public/Main.vue')
+      },
+    ]
   },
   {
     path: '/workspace',
