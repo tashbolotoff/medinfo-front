@@ -9,6 +9,7 @@ import MessageService from '@/services/MessageService'
 import CategoriesService from '@/services/CategoriesService'
 import VariantsService from '@/services/VariantsService'
 import QuestionService from '@/services/QuestionService'
+import PublicService from '@/services/PublicService'
 
 export {
   AuthService,
@@ -21,5 +22,6 @@ export {
   MessageService,
   CategoriesService,
   VariantsService,
-  QuestionService
+  QuestionService,
+  PublicService
 }

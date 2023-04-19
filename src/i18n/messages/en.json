@@ -1,0 +1,16 @@
+{
+  "message": {
+    "welcome": "Welcome to the questionnaire system!",
+    "welcomeDescr": "To proceed, please enter your PIN in the search field below.",
+    "pin": "Enter your PIN",
+    "pinHelp": "The PIN must consist of 14 digits",
+    "searchBtn": "Search"
+  },
+  "anketa": {
+    "anketa": "Questionnaire",
+    "startTest": "Start test",
+    "prev": "Previous",
+    "next": "Next",
+    "save": "Save"
+  }
+}

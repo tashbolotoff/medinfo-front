@@ -15,19 +15,15 @@ import './assets/css/main.css'
 import './assets/sass/app.scss'
 import {createI18n} from 'vue-i18n'
 import ru from './i18n/messages/ru.json'
+import kg from './i18n/messages/kg.json'
+import en from './i18n/messages/en.json'
 
 
 const i18n = createI18n({
   locale: 'ru', // язык по умолчанию
   fallbackLocale: 'ru',
   messages: {
-   ru,
-    fr: {
-      message: {
-        greeting: 'Bonjour!',
-        farewell: 'Au revoir!'
-      }
-    }
+   ru,kg, en
   }
 })
 const app = createApp(App)
