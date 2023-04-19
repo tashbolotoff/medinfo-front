@@ -1,80 +1,84 @@
 <template>
-    <div class="grid grid-cols-12 gap-3">
-      <!-- Таблица овтетов-->
-      <div class="col-span-12 bg-theme-19 rounded-2xl shadow p-5">
-        <div class="grid grid-cols-12 gap-4 p-2">
-          <div class="col-span-6 font-bold text-base">
-            Список вариантов ответа на вопрос: {{ question.nameRu }}
-          </div>
-          <div class="col-span-6 flex justify-end">
-            <button @click="closeComponent" type="button" class="btn btn-sm btn-secondary">
-              <XIcon/>
-              Закрыть
-            </button>
-          </div>
-          <div class="col-span-6">
-            <span class="font-medium">Кол-во вариантов ответа:</span> {{ question.answers.length }}
-          </div>
-          <div class="col-span-6 flex justify-end">
-            <button @click="showModalCreateAnswer" type="button" class="btn btn-sm btn-primary">
-              <PlusIcon/>
-              Добавить
-            </button>
-          </div>
+  <div class="grid grid-cols-12 gap-3">
+    <!-- Таблица овтетов-->
+    <div class="col-span-12 bg-theme-19 rounded-2xl shadow p-5">
+      <div class="grid grid-cols-12 gap-4 p-2">
+        <div class="col-span-6 font-bold text-base">
+          Список вариантов ответа на вопрос: {{ question.nameRu }}
         </div>
-        <div class="overflow-x-auto">
-          <table class="table">
-            <thead class="rounded-full sticky">
-            <tr class="bg-gray-200 text-gray-700">
-              <th class="border-b-2 text-center dark:border-dark-5 width-60">Название</th>
-              <th class="border-b-2 text-center dark:border-dark-5 width-60">Конечный ответ</th>
-              <th class="border-b-2 text-center dark:border-dark-5 width-60">Действия</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="item in question.answers" v-bind:key="item">
-              <td class="border text-center">
-                <div>RU: {{ item.nameRu }}</div>
-                <div>KG: {{ item.nameKg }}</div>
-                <div>EN: {{ item.nameEn }}</div>
-              </td>
-              <td class="border text-center">
-                {{ item.end ? 'Да' : 'Нет' }}
-              </td>
-              <td class="border text-center">
-                <div class="dropdown">
-                  <button class="dropdown-toggle btn btn-sm btn-secondary" aria-expanded="false">
-                    Действия
-                    <ChevronDownIcon class="w-4 h-4 ml-2"/>
-                  </button>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                      <button type="button" v-if="AdminService.hasAccess(['ANKETA_EDIT'])"
-                              @click="showModalUpdateAnswer(item);hide"
-                              class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                        <Edit2Icon class="w-4 h-4 mr-2"/>
-                        Редактировать
-                      </button>
-                      <button type="button" v-if="AdminService.hasAccess(['ANKETA_EDIT'])"
-                         class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                         @click="showModalDelete(item)"
-                      >
-                        <Trash2Icon class="w-4 h-4 mr-1"/>
-                        Удалить
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr v-if="question.answers.length===0">
-              <td colspan="10" class="text-center border">(нет записей)</td>
-            </tr>
-            </tbody>
-          </table>
+        <div class="col-span-6 flex justify-end">
+          <button @click="closeComponent" type="button" class="btn btn-sm btn-secondary">
+            <XIcon/>
+            Закрыть
+          </button>
+        </div>
+        <div class="col-span-6">
+          <span class="font-medium">Кол-во вариантов ответа:</span> {{ question.answers.length }}
+        </div>
+        <div class="col-span-6 flex justify-end">
+          <button @click="showModalCreateAnswer" type="button" class="btn btn-sm btn-primary">
+            <PlusIcon/>
+            Добавить
+          </button>
         </div>
       </div>
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead class="rounded-full sticky">
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="border-b-2 text-center dark:border-dark-5 width-60">Название</th>
+            <th class="border-b-2 text-center dark:border-dark-5 width-60">Конечный ответ</th>
+            <th class="border-b-2 text-center dark:border-dark-5 width-60">Порядковый номер</th>
+            <th class="border-b-2 text-center dark:border-dark-5 width-60">Действия</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in question.answers" v-bind:key="item">
+            <td class="border text-center">
+              <div>RU: {{ item.nameRu }}</div>
+              <div>KG: {{ item.nameKg }}</div>
+              <div>EN: {{ item.nameEn }}</div>
+            </td>
+            <td class="border text-center">
+              {{ item.end ? 'Да' : 'Нет' }}
+            </td>
+            <td class="border text-center">
+              {{ item.number }}
+            </td>
+            <td class="border text-center">
+              <div class="dropdown">
+                <button class="dropdown-toggle btn btn-sm btn-secondary" aria-expanded="false">
+                  Действия
+                  <ChevronDownIcon class="w-4 h-4 ml-2"/>
+                </button>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                    <button type="button" v-if="AdminService.hasAccess(['ANKETA_EDIT'])"
+                            @click="showModalUpdateAnswer(item);hide"
+                            class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                      <Edit2Icon class="w-4 h-4 mr-2"/>
+                      Редактировать
+                    </button>
+                    <button type="button" v-if="AdminService.hasAccess(['ANKETA_EDIT'])"
+                            class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                            @click="showModalDelete(item)"
+                    >
+                      <Trash2Icon class="w-4 h-4 mr-1"/>
+                      Удалить
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr v-if="question.answers.length===0">
+            <td colspan="10" class="text-center border">(нет записей)</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
   <!--  Модлка для добавления вопросов-->
   <div
@@ -128,6 +132,16 @@
                 v-model="modalParams.datas.nameEn"
                 type="text"
                 placeholder="Введите наименование ответа на ангийском..."
+                class="form-control"
+              />
+            </div>
+            <div class="col-span-12">
+              <label class="form-label">Порядковый номер<span style="color: red">*</span></label>
+              <input
+                required
+                v-model="modalParams.datas.number"
+                type="number"
+                placeholder="Введите порядковый номер..."
                 class="form-control"
               />
             </div>
@@ -218,6 +232,7 @@ const modalParams = reactive({
     nameRu: null,
     nameEn: null,
     end: false,
+    number: null,
     questionId: null
   }
 })
@@ -227,8 +242,9 @@ function showModalCreateAnswer() {
   modalParams.show = true
   modalParams.datas.questionId = props.question.id
 }
+
 function closeComponent() {
- emit('reset-selected-question')
+  emit('reset-selected-question')
 }
 
 function showModalUpdateAnswer(item) {
@@ -239,6 +255,7 @@ function showModalUpdateAnswer(item) {
   modalParams.datas.nameRu = item.nameRu
   modalParams.datas.nameEn = item.nameEn
   modalParams.datas.end = item.end
+  modalParams.datas.number = item.number
   modalParams.datas.questionId = props.question.id
 }
 
@@ -250,6 +267,7 @@ function resetModalAnswerData() {
   modalParams.datas.nameKg = null
   modalParams.datas.nameEn = null
   modalParams.datas.end = false
+  modalParams.datas.number = null
 }
 
 function createAnswer() {
@@ -278,9 +296,11 @@ function createAnswer() {
     })
   })
 }
+
 const hide = () => {
   cash('.dropdown-menu').dropdown('hide')
 }
+
 function updateAnswer() {
   modalParams.loading = true
   QuestionService.updateAnswer(modalParams.datas).then(response => {

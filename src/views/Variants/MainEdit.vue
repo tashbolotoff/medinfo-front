@@ -42,6 +42,7 @@
             <tr class="bg-gray-200 text-gray-700">
               <th class="border-b-2 text-center dark:border-dark-5 width-60">Название</th>
               <th class="border-b-2 text-center dark:border-dark-5 width-60">Мультивыбор</th>
+              <th class="border-b-2 text-center dark:border-dark-5 width-60">Порядковый номер</th>
               <th class="border-b-2 text-center dark:border-dark-5 width-60">Действия</th>
             </tr>
             </thead>
@@ -54,6 +55,9 @@
               </td>
               <td class="border text-center">
                 {{ item.multiple ? 'Да' : 'Нет' }}
+              </td>
+              <td class="border text-center">
+                {{ item.number }}
               </td>
               <td class="border text-center">
                 <div class="dropdown">
@@ -153,6 +157,16 @@
               />
             </div>
             <div class="col-span-12">
+              <label class="form-label">Порядковый номер<span style="color: red">*</span></label>
+              <input
+                required
+                v-model="modalParams.datas.number"
+                type="number"
+                placeholder="Введите порядковый номер..."
+                class="form-control"
+              />
+            </div>
+            <div class="col-span-12">
               <div class="form-check mt-5">
                 <input id="horizontal-form-3" class="form-check-input" type="checkbox"
                        v-model="modalParams.datas.multiple">
@@ -242,6 +256,7 @@ const modalParams = reactive({
     nameEn: null,
     multiple: false,
     variantId: null,
+    number: null
   }
 })
 
@@ -263,6 +278,7 @@ function showModalUpdateQuestion(item) {
   modalParams.datas.nameRu = item.nameRu
   modalParams.datas.nameEn = item.nameEn
   modalParams.datas.multiple = item.multiple
+  modalParams.datas.number = item.number
 
   hide()
 }
@@ -274,6 +290,7 @@ function resetModalQuestionData() {
   modalParams.datas.nameRu = null
   modalParams.datas.nameKg = null
   modalParams.datas.nameEn = null
+  modalParams.datas.number = null
   modalParams.datas.multiple = false
 
 }

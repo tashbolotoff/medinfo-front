@@ -102,11 +102,12 @@
             <label v-if="$i18n.locale == 'kg'" class="form-label">{{
                 anketa.questions[anketa.currentIndex].nameKg
               }}</label>
+            <!-- Checkbox -->
             <div class="flex flex-col sm:flex-row mt-2" v-if="anketa.questions[anketa.currentIndex].multiple">
-              <div class="form-check mr-2" v-for="item in anketa.questions[anketa.currentIndex].answers">
+              <div class="form-check mr-2" v-for="item in anketa.questions[anketa.currentIndex].answers" :key="item.id">
                 <input @change="onChangeAnswer(item)" :id="'checkbox-switch-4'+item.id"
-                       v-model="allAnswers[anketa.currentIndex].answertsMultiple"
-                       required
+                       v-model="allAnswers[anketa.currentIndex].answertsMultiple" :name="'multi'+item.id"
+                       :required="isRequired"
                        class="form-check-input" type="checkbox" :value="item.id"/>
                 <label v-if="$i18n.locale == 'ru'" class="form-check-label"
                        :for="'checkbox-switch-4'+item.id">{{ item.nameRu }}</label>
@@ -117,6 +118,7 @@
               </div>
             </div>
 
+            <!-- Radio button-->
             <div class="flex flex-col sm:flex-row mt-2" v-else>
               <div class="form-check mr-2" v-for="item in anketa.questions[anketa.currentIndex].answers">
                 <input @change="onChangeAnswer(item)" :id="'radio-switch-4'+item.id"
@@ -166,7 +168,7 @@
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {computed, reactive, ref} from "vue";
 import {PublicService} from "@/services";
 import {createToast} from "mosha-vue-toastify";
 import {useI18n} from "vue-i18n";
@@ -190,6 +192,7 @@ const blockSettings = reactive({
   finished: false
 })
 const allAnswers = ref([])
+const isRequired = computed(() => allAnswers.value[anketa.currentIndex].answertsMultiple.length === 0);
 
 function getAnketaByPin() {
   anketa.value = null
