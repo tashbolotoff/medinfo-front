@@ -1,4 +1,16 @@
 <template>
+  <div style="position: fixed;
+  left: 30%;
+      right: 50%;
+      z-index: 999999;
+      width: 40%;
+      height: 50%;
+      top: 35%;" v-if="blockSettings.saveLoading">
+    <div class="flex justify-center">
+      <LoadingIcon style="z-index: 8888" class="w-24 h-24" icon="puff"/>
+    </div>
+    <div class="text-center text-xl font-medium italic text-theme-13">Сохранение....</div>
+  </div>
   <!-- LOCALE-->
   <div class="grid grid-cols-12 gap-2 justify-items-center mt-3">
     <div class="col-span-12 flex flex-wrap">
@@ -14,7 +26,7 @@
     </div>
   </div>
   <!-- Поиск по ПИН и результат-->
-  <div v-if="blockSettings.showSearchBlock" class="grid grid-cols-12 gap-3 mt-2 box p-5">
+  <div v-if="blockSettings.showSearchBlock && !blockSettings.finished" class="grid grid-cols-12 gap-3 mt-2 box p-5">
     <div class="col-span-12 justify-center flex font-bold text-xl">
       {{ $t('message.welcome') }}
     </div>
@@ -59,9 +71,10 @@
 
   </div>
   <!-- Поиск по ПИН и результат-->
-  <template v-if="!blockSettings.showSearchBlock">
+  <template v-if="!blockSettings.showSearchBlock && !blockSettings.finished">
     <!-- Анкета -->
-    <div v-if="anketa.variant != null" class="intro-y box py-10 sm:py-20 mt-5">
+    <div v-if="anketa.variant != null" class="intro-y box py-10 sm:py-20 mt-5"
+         :style="blockSettings.saveLoading ? 'pointer-events: none; filter: blur(5px);' : ''">
       <div
         class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20"
       >
@@ -138,14 +151,27 @@
     </div>
   </template>
 
+  <!-- Сообщение об успешном сохранении-->
+  <template v-if="blockSettings.finished">
+    <div class="grid grid-cols-12 gap-3 box p-5">
+      <div class="col-span-12 justify-center flex">
+        <CheckCircleIcon color="green" class="w-20 h-20"/>
+      </div>
+      <div class="col-span-12 justify-center flex">
+        <p class="text-center font-bold text-xl">{{ $t('anketa.successFinished') }}</p>
+      </div>
+    </div>
+  </template>
+
 </template>
 
 <script setup>
-import {inject, reactive, ref} from "vue";
+import {reactive, ref} from "vue";
 import {PublicService} from "@/services";
 import {createToast} from "mosha-vue-toastify";
+import {useI18n} from "vue-i18n";
 
-const i18nLocale = inject('$i18n')
+const {t} = useI18n();
 
 const data = reactive({
   pin: null
@@ -159,19 +185,20 @@ const anketa = reactive({
 const blockSettings = reactive({
   searchLoading: false,
   showSearchBlock: true,
-  isEndAnswer: false
+  isEndAnswer: false,
+  saveLoading: false,
+  finished: false
 })
 const allAnswers = ref([])
 
 function getAnketaByPin() {
-  console.log(i18nLocale)
   anketa.value = null
   blockSettings.searchLoading = true
   PublicService.getAnketaByPin(data.pin).then(response => {
     blockSettings.searchLoading = false
     if (response.status == 204) {
       createToast({
-        title: '',
+        title: t('anketa.notFoundAnketa'),
       }, {
         type: 'danger',
         position: 'top-right',
@@ -186,7 +213,7 @@ function getAnketaByPin() {
   }).catch(error => {
     blockSettings.searchLoading = false
     createToast({
-      title: '',
+      title: t('anketa.notFoundAnketa'),
     }, {
       type: 'danger',
       position: 'top-right',
@@ -221,7 +248,39 @@ function onChangeAnswer(item) {
 }
 
 function saveAnketa() {
-  console.log("Сохранение")
+  let list = []
+  allAnswers.value.forEach(item => {
+    if (item.answersSingle != null) {
+      list.push({answerId: item.answersSingle, patientVariantId: anketa.id})
+    } else {
+      item.answertsMultiple.forEach(it => {
+        list.push({answerId: it, patientVariantId: anketa.id})
+      })
+    }
+  })
+  blockSettings.saveLoading = true
+  PublicService.saveAnketaByPin(list).then(response => {
+    blockSettings.saveLoading = false
+    blockSettings.finished = true
+    createToast({
+      title: t('anketa.savedAnketa'),
+    }, {
+      type: 'success',
+      position: 'top-right',
+      showIcon: true,
+      timeout: 3000
+    })
+  }).catch(error => {
+    blockSettings.saveLoading = false
+    createToast({
+      title: t('anketa.notSavedAnketa'),
+    }, {
+      type: 'danger',
+      position: 'top-right',
+      showIcon: true,
+      timeout: 3000
+    })
+  })
 }
 </script>
 

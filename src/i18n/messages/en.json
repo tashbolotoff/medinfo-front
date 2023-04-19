@@ -11,6 +11,10 @@
     "startTest": "Start test",
     "prev": "Previous",
     "next": "Next",
-    "save": "Save"
+    "save": "Save",
+    "notFoundAnketa": "There is no up-to-date questionnaire for your PIN!",
+    "savedAnketa": "Your profile has been successfully saved! Thanks!",
+    "notSavedAnketa": "Error! The questionnaire has not been saved!",
+    "successFinished": "The questionnaire has been successfully completed! Thanks!"
   }
 }

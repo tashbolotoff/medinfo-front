@@ -20,6 +20,7 @@ import en from './i18n/messages/en.json'
 
 
 const i18n = createI18n({
+  legacy: false,
   locale: 'ru', // язык по умолчанию
   fallbackLocale: 'ru',
   messages: {

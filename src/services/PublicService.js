@@ -8,6 +8,13 @@ async function getAnketaByPin(pin) {
   })
 }
 
+async function saveAnketaByPin(list) {
+  return await $api.post('/OpenServices/set_anketa',
+    list
+  )
+}
+
 export default {
-  getAnketaByPin
+  getAnketaByPin,
+  saveAnketaByPin
 }
