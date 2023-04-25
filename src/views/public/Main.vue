@@ -25,7 +25,7 @@
                                                                        src="@/assets/flags/usa.png"></button>
     </div>
   </div>
-  <!-- Поиск по ПИН и результат-->
+  <!-- Поиск по ПИН и результат (старт)-->
   <div v-if="blockSettings.showSearchBlock && !blockSettings.finished" class="grid grid-cols-12 gap-3 mt-2 box p-5">
     <div class="col-span-12 justify-center flex font-bold text-xl">
       {{ $t('message.welcome') }}
@@ -70,7 +70,7 @@
     </template>
 
   </div>
-  <!-- Поиск по ПИН и результат-->
+  <!-- Поиск по ПИН и результат (сама анкета)-->
   <template v-if="!blockSettings.showSearchBlock && !blockSettings.finished">
     <!-- Анкета -->
     <div v-if="anketa.variant != null" class="intro-y box py-10 sm:py-20 mt-5"
@@ -153,6 +153,48 @@
     </div>
   </template>
 
+  <!-- Блок для создания анкеты ВРУЧНУЮ-->
+  <template v-if="blockSettings.showFieldsForCreate">
+    <form class="grid grid-cols-12 gap-3 box p-5 mt-5" @submit.prevent="creationAnketaByPatient()">
+      <div class="col-span-12 justify-center flex font-light text-sm">
+        {{ $t('anketa.notFoundAnketa') }} *
+      </div>
+      <!-- Область-->
+      <div class="col-span-12">
+        <label>{{ $t('anketa.selectOblast') }}<span class="text-primary-3">*</span></label>
+        <Select2 required :settings="select2Settings" @select="getRayonsByOblastId($event)"
+                 :options="dictionaries.oblasts"/>
+      </div>
+      <!-- Район-->
+      <div class="col-span-12">
+        <label>{{ $t('anketa.selectRayon') }} <span class="text-primary-3">*</span></label>
+        <Select2 required :settings="select2Settings" @select="getOzByRayonId($event)" :options="dictionaries.rayons"/>
+      </div>
+      <!-- ОЗ-->
+      <div class="col-span-12">
+        <label>{{ $t('anketa.selectOz') }}<span class="text-primary-3">*</span></label>
+        <Select2 required :settings="select2Settings" @select="onChangeHospital($event)"
+                 :options="dictionaries.hospitals"/>
+      </div>
+      <!-- Продолжить кнопка-->
+      <div v-if="anketa.variant == null" class="col-span-12 justify-end flex">
+        <button class="btn btn-primary" type="submit">{{ $t('anketa.continue') }}</button>
+      </div>
+      <!-- Результат-->
+      <template v-if="anketa.variant != null">
+        <div class="col-span-12 justify-center flex">
+          <p class="font-bold text-base">{{ $t('anketa.anketa') }}: <span class="font-normal">{{
+              anketa.variant.name
+            }}</span></p>
+        </div>
+        <div class="col-span-12 justify-center flex">
+          <button class="btn btn-success" @click="startTest()">{{ $t('anketa.startTest') }}&nbsp;<PlayIcon/>
+          </button>
+        </div>
+      </template>
+    </form>
+  </template>
+
   <!-- Сообщение об успешном сохранении-->
   <template v-if="blockSettings.finished">
     <div class="grid grid-cols-12 gap-3 box p-5">
@@ -172,6 +214,8 @@ import {computed, reactive, ref} from "vue";
 import {PublicService} from "@/services";
 import {createToast} from "mosha-vue-toastify";
 import {useI18n} from "vue-i18n";
+import Select2 from "vue3-select2-component";
+import {select2Settings} from "@/helpers/select2Settings";
 
 const {t} = useI18n();
 
@@ -189,13 +233,27 @@ const blockSettings = reactive({
   showSearchBlock: true,
   isEndAnswer: false,
   saveLoading: false,
-  finished: false
+  finished: false,
+  showFieldsForCreate: false
 })
 const allAnswers = ref([])
 const isRequired = computed(() => allAnswers.value[anketa.currentIndex].answertsMultiple.length === 0);
+const dictionaries = reactive({
+  oblasts: [],
+  rayons: [],
+  hospitals: []
+})
+const datasCreateAnketa = reactive({
+  ozName: null,
+  ozCode: null,
+  ozCodeOld: null,
+  ozId: null,
+  ozParentCode: null
+})
 
 function getAnketaByPin() {
-  anketa.value = null
+  blockSettings.showFieldsForCreate = false
+  anketa.variant = null
   blockSettings.searchLoading = true
   PublicService.getAnketaByPin(data.pin).then(response => {
     blockSettings.searchLoading = false
@@ -214,20 +272,23 @@ function getAnketaByPin() {
       anketa.questions = response.data.variant.questions
     }
   }).catch(error => {
+    blockSettings.showFieldsForCreate = true
     blockSettings.searchLoading = false
+    getOblasts()
     createToast({
       title: t('anketa.notFoundAnketa'),
     }, {
-      type: 'danger',
+      type: 'warning',
       position: 'top-right',
       showIcon: true,
-      timeout: 3000
+      timeout: 4000
     })
   })
 }
 
 function startTest() {
   blockSettings.showSearchBlock = false
+  blockSettings.showFieldsForCreate = false
   allAnswers.value.push({question: anketa.questions[0].id, answersSingle: null, answertsMultiple: []})
 }
 
@@ -285,6 +346,71 @@ function saveAnketa() {
     })
   })
 }
+
+//FUNCTIONS WHEN NOT FOUND ACTUAL ANKETA
+function getOblasts() {
+  PublicService.getOblasts().then(response => {
+    dictionaries.oblasts = []
+    response.data.result.forEach(item => {
+      dictionaries.oblasts.push({id: item.id, text: item.nameRu})
+    })
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+function getRayonsByOblastId(event) {
+  PublicService.getRayonsByOblastId(event.id).then(response => {
+    if (response.data != null) {
+      dictionaries.rayons = []
+      response.data.forEach(item => {
+        dictionaries.rayons.push({id: item.id, text: item.nameRu})
+      })
+    }
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+function getOzByRayonId(event) {
+  PublicService.getOzByRayonId(event.id).then(response => {
+    if (response.data != null) {
+      dictionaries.hospitals = []
+      response.data.forEach(item => {
+        dictionaries.hospitals.push(
+          {
+            id: item.id,
+            text: item.nameRu,
+            newCodeLPU: item.newCodeLPU,
+            codeLPU: item.codeLPU,
+            newParentCode: item.newParentCode
+          }
+        )
+      })
+    }
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+function onChangeHospital(event) {
+  datasCreateAnketa.ozId = event.id
+  datasCreateAnketa.ozName = event.text
+  datasCreateAnketa.ozCode = event.newCodeLPU
+  datasCreateAnketa.ozCodeOld = event.codeLPU
+  datasCreateAnketa.ozParentCode = event.newParentCode
+}
+
+function creationAnketaByPatient() {
+  anketa.variant = null
+  PublicService.creationAnketaByPatient(data.pin, datasCreateAnketa.ozName, datasCreateAnketa.ozCode, datasCreateAnketa.ozCodeOld, datasCreateAnketa.ozId, datasCreateAnketa.ozParentCode).then(response => {
+    if (response.data != null) {
+      anketa.id = response.data.id
+      anketa.variant = response.data.variant
+      anketa.questions = response.data.variant.questions
+    }
+  }).catch(error => {
+    console.log(error)
+  })
+}
 </script>
-
-
